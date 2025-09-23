@@ -1,15 +1,32 @@
-$dsdfc_8383
-$dccvsdcsc_3221
-$cdsc_31
-$fefs_2
-435435
-other
-select;
-"Hola a todos"
-dsdcds
-int main {
-    for (int i =0; i<19; i++){
-        printf("Hola mundo);
-    }
-}
-s
+$clase_1
+alternative
+big
+evaluate
+$clase_2
+$identificadores
+
+$clase_3
+0 3432
+O432442
+
+$clase_4
+"Hola mundo"
+'a' 'b'
+"'"
+'"'
+"ejemplos no "validos"
+""
+"""
+"hola' mundo"
+[alonso_m]
+{macarena}
+(marco), : final;
+
+$operadores_aritmeticos
++ - * / % \  ^
+
+$operadores_relacionales
+< > <= >= == !=
+
+$operador_de_asignacion
+=
