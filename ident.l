@@ -5,12 +5,12 @@
    #include <stdio.h>
    #include <stdlib.h>
    #include <string.h>
+
    #define TAMANIO_TABLA 100
    extern FILE *yyout;
    extern FILE *yyin;
    FILE *apSal;
 
-    // CORRECCIÓN 1: Definir structs ANTES de declararlas
     struct TablaSimbolos{
         int posicion;
         char *nombre_identificador;
@@ -71,8 +71,7 @@
         pos_tabla_literales_numericas++;
         return posicion_actual;
     }
-    
-    // CORRECCIÓN 5: Cambiar nombre de función para que coincida
+
     int buscar_o_insertar_literal_cad(char *cadena) {
         for (int i = 0; i < pos_tabla_literales_cadenas; i++) {
             if (strcmp(cadena, tabla_literales_cadena[i].dato) == 0) {
@@ -88,6 +87,7 @@
     }
     
     void imprimir_token(int clase, int pos) {
+        
         printf("Token agregado: (%d, %d)\n", clase, pos);
         fprintf(apSal, "Token agregado: (%d, %d)\n", clase, pos);
         fflush(apSal);
@@ -127,7 +127,7 @@
 ">"             { imprimir_token(7, 1); }
 
 
-\$[a-zA-Z]+     {
+\$[a-zA-Z_]+     {
                     int pos = buscar_o_insertar_identificador(yytext);
                     imprimir_token(1, pos);
                 }
@@ -156,14 +156,26 @@
                     free(valor_limpio);
                 }
 
+[\[]    { imprimir_token(5, 1); }
+[\]]     { imprimir_token(5, 2); }
+[\(]     { imprimir_token(5, 3); }
+[\)]     { imprimir_token(5, 4); }
+[\{]     { imprimir_token(5, 5); }
+[\}]     { imprimir_token(5, 6); }
+[,]     { imprimir_token(5, 7); }
+[:]     { imprimir_token(5, 8); }
+[;]     { imprimir_token(5, 9); }
 
-[\[\](){},:;]   { imprimir_token(5, yytext[0]); }
+[+]     { imprimir_token(6, 1); }
+[/]     { imprimir_token(6, 2); }
+[*]     { imprimir_token(6, 3); }
+[%]     { imprimir_token(6, 4); }
+[-]     { imprimir_token(6, 5); }
+[\^]     { imprimir_token(6, 6); }
+[\\]     { imprimir_token(6, 7); }
 
 
-[+\*/%\-\^\\]   { imprimir_token(6, yytext[0]); }
-
-
-"="             { imprimir_token(8, yytext[0]); }
+"="     { imprimir_token(8, 1); }
 
 
 .               { 
